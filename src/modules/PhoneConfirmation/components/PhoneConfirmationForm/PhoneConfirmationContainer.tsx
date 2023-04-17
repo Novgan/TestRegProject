@@ -1,17 +1,13 @@
-import { useNavigate } from "react-router-dom";
 import FormContainer from "../../../../components/uiKit/Forms/FormContainer/FormContainer";
 import PhoneConfirmationForm from "./PhoneConfirmationForm";
 import { schema } from "./schema";
-import { PhoneConfirmationFormField } from "./models";
 
 const defaultValues = {
     code: "",
 };
 
 const PhoneConfirmationContainer = () => {
-    const navigate = useNavigate();
-
-    const submitPhoneConfirmationHandler = (formField: PhoneConfirmationFormField) => {};
+    const submitPhoneConfirmationHandler = () => {};
 
     return (
         <div className="flex-[3]">

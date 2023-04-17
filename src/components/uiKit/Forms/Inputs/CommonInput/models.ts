@@ -19,7 +19,6 @@ export interface InputProps {
     accept?: string;
     autoFocus?: boolean;
     maxLength?: number;
-    isFilter?: boolean;
     onClick?: MouseEventHandler<HTMLInputElement>;
     onChange?: ChangeEventHandler<HTMLInputElement>;
     onBlur?: FocusEventHandler<HTMLInputElement>;

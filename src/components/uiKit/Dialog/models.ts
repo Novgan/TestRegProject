@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react";
-import { ButtonVariant } from "../Button/models";
 
 export interface DialogProps {
     isOpen: boolean;
@@ -7,9 +6,7 @@ export interface DialogProps {
     children?: JSX.Element | React.ReactFragment;
     cancelText?: string;
     submitText?: string;
-    cancelButtonVariant?: ButtonVariant;
     isCancelButtonDisabled?: boolean;
-    submitButtonVariant?: ButtonVariant;
     isSubmitButtonDisabled?: boolean;
     submitButtonClassName?: string;
     cancelButtonClassName?: string;

@@ -1,36 +1,57 @@
-import { useEffect } from "react";
 import AdditionalInfoContainer from "./components/AdditionalInfoForm/AdditionalInfoContainer";
 import AdditionalInfoSideBar from "./components/AdditionalInfoSideBar/AdditionalInfoSideBar";
-import { useSearchParams } from "react-router-dom";
-import { setAuthTokenToAxiosClient } from "../../shared/utils/auth";
-import { confirmEmail } from "../../api/profile";
+import { Navigate, useSearchParams } from "react-router-dom";
+import { setAuthToken } from "../../shared/utils/auth";
+import { loginUser } from "../../api/profile";
 import { useQuery } from "react-query";
-
-// e5c6a74c411aae53a928ed467e83c643
-
-// https://api.prof.world/v2.0/profile/confirmEmail/?data=%7B%22token%22:%22de16eb00de6d67f55cc1fb99d17fe110%22,%22ref%22:%22http://example.com%22%7D
+import { userSlice } from "../../store/reducers/UserSlice";
+import { useAppDispatch } from "../../shared/hooks/redux";
+import { ROUTES } from "../../shared/constants/routes";
 
 const AdditionalInfoModule = () => {
     const [searchParams] = useSearchParams();
-    const token = searchParams.get("token") ?? "";
+    const { setUserInfo } = userSlice.actions;
+    const dispatch = useAppDispatch();
+    const email = searchParams.get("email") ?? "";
+    const password = searchParams.get("password") ?? "";
 
-    useQuery(["profile", "confirmEmail"], confirmEmail({ token, ref: "http://example.com" }), {
-        enabled: Boolean(token),
-        onSuccess: query => {
-            if (!query.data.status) return;
+    const { isFetching } = useQuery(["profile", "login"], loginUser({ email, password }), {
+        enabled: Boolean(email && password),
+        select: queryData => queryData.data,
+        onSuccess: ({ status, user_data }) => {
+            if (!status) return;
+            const {
+                email: userEmail,
+                token,
+                birth_date: birthDate,
+                phone,
+                lname,
+                name,
+                sname,
+                gender_id: genderId,
+            } = user_data;
+
+            setAuthToken(token);
+            dispatch(
+                setUserInfo({
+                    birthday: birthDate,
+                    phone: phone,
+                    lastName: lname,
+                    firstName: name,
+                    middleName: sname,
+                    sex: genderId,
+                    email: userEmail,
+                })
+            );
         },
     });
 
-    useEffect(() => {
-        if (token) {
-            setAuthTokenToAxiosClient(token);
-        }
-    }, []);
+    if (!email || !password) return <Navigate to={ROUTES.authorization.route} replace />;
 
     return (
         <div className="flex h-screen">
             <AdditionalInfoSideBar />
-            <AdditionalInfoContainer />
+            <AdditionalInfoContainer isFetching={isFetching} />
         </div>
     );
 };

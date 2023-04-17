@@ -3,8 +3,6 @@ import { DialogFooterProps } from "../models";
 import { OutlineButton, SolidButton } from "../../Button/Button";
 
 const DialogFooter: FC<DialogFooterProps> = ({
-    cancelButtonVariant,
-    submitButtonVariant,
     isSubmitButtonDisabled,
     cancelText,
     submitText,
@@ -19,7 +17,6 @@ const DialogFooter: FC<DialogFooterProps> = ({
             <SolidButton
                 type="button"
                 data-testid="submit-dialog-button"
-                variant={submitButtonVariant}
                 text={submitText}
                 onClick={onSubmit}
                 className={submitButtonClassName}
@@ -29,7 +26,6 @@ const DialogFooter: FC<DialogFooterProps> = ({
                 <OutlineButton
                     type="button"
                     data-testid="cancel-dialog-button"
-                    variant={cancelButtonVariant}
                     text={cancelText}
                     onClick={onCancel}
                     className={cancelButtonClassName}

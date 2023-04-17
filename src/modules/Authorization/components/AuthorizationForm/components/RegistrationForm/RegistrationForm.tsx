@@ -27,7 +27,7 @@ const RegistrationForm = () => {
                     placeholder="Повторите ваш пароль"
                     disabled={isSubmitting}
                 />
-                <SolidButton size="sm" text="Зарегистрироваться" type="submit" disabled={!isDirty} />
+                <SolidButton text="Зарегистрироваться" type="submit" disabled={!isDirty} />
             </div>
             <div className="flex items-center gap-x-6">
                 <span className="h-px flex-1 bg-gray-300" />

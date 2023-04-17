@@ -10,7 +10,7 @@ const RoutSwitcher = () => {
             <Routes>
                 <Route path={ROUTES.registration.phoneConfirmation.route} element={<PhoneConfirmationModule />} />
                 <Route path={ROUTES.registration.additionalInfo.route} element={<AdditionalInfoModule />} />
-                <Route path={ROUTES.authorization.route} element={<AuthorizationModule />} />
+                <Route path="*" element={<AuthorizationModule />} />
             </Routes>
         </BrowserRouter>
     );

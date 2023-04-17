@@ -13,7 +13,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             inputClassName = "",
             containerClassName = "",
             value,
-            isFilter = false,
             onChange = () => {},
             formRef,
             ...rest
@@ -25,24 +24,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         const inputIconPosition = `${label ? "pt-3 top-1/2 -translate-y-1/2" : "top-1/2 -translate-y-1/2"}`;
 
         const ringClassName = useMemo(() => {
-            const classNames = [];
-
             if (errorMessage) {
                 return "outline-error-100 outline outline-2 outline-offset-0 border-transparent focus:border-transparent";
             }
 
-            if (value && isFilter) {
-                classNames.push(
-                    "outline",
-                    "outline-offset-0",
-                    "outline-brand-200",
-                    "border-transparent",
-                    "focus:border-transparent"
-                );
-            }
-
-            return classNames.join(" ");
-        }, [isFilter, errorMessage, value]);
+            return "";
+        }, [errorMessage]);
 
         return (
             <div className={`flex flex-col ${containerClassName}`}>
@@ -57,7 +44,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                         name={name}
                         ref={ref}
                         id={`${name ?? ""}${customId}`}
-                        className={`peer w-full order-2 border-inset border border-dark-600 rounded-lg outline-none ${inputIconPadding} text-md px-4 py-3 max-h-10 disabled:text-dark-700 disabled:bg-dark-100 placeholder:text-dark-800 focus:border-2 hover:border-brand-400 focus:border-brand-500 ${ringClassName} ${inputClassName}`}
+                        className={`peer w-full order-2 border-inset border border-dark-600 rounded-lg outline-none ${inputIconPadding} text-md px-4 py-3 max-h-10 disabled:text-dark-700 disabled:bg-light-200 disabled:border-light-100 placeholder:text-dark-800 focus:border-2 ${
+                            rest.disabled ? "" : "hover:border-brand-400"
+                        } focus:border-brand-500 ${ringClassName} ${inputClassName}`}
                     />
                     {startIcon && (
                         <div

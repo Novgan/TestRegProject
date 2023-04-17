@@ -11,3 +11,4 @@ export { default as LinkedinIcon } from "./LinkedinIcon";
 export { default as OpenEyeIcon } from "./OpenEyeIcon";
 export { default as RedBackgroundCrossIcon } from "./RedBackgroundCrossIcon";
 export { default as LoadingIcon } from "./LoadingIcon";
+export { default as ChevronDownIcon } from "./ChevronDownIcon";

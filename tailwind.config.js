@@ -23,6 +23,10 @@ export default {
                 error: {
                     100: "#FF776F",
                 },
+                light: {
+                    100: "#CBD5E2",
+                    200: "#DCDEFC",
+                },
             },
         },
     },

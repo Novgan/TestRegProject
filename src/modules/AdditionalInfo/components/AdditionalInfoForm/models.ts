@@ -1,5 +1,6 @@
 export interface AdditionalInfoFormProps {
     onLogoutHandler: () => void;
+    isFetching: boolean;
 }
 export interface AdditionalInfoFormFields {
     lastName: string;

@@ -30,7 +30,7 @@ const AdditionalInfoForm = () => {
                         <FormInput name="code" label="SMS-код" placeholder="Укажите код" disabled={isSubmitting} />
                         <SendSmsAgain />
                     </div>
-                    <SolidButton size="sm" text="Подтвердить" type="submit" disabled={!isDirty} />
+                    <SolidButton text="Подтвердить" type="submit" disabled={!isDirty} />
                 </div>
             </div>
             <div>

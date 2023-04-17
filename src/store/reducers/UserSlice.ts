@@ -2,13 +2,13 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { UserState } from "../models";
 
 const initialState: UserState = {
-    phone: "",
-    lastName: "",
-    firstName: "",
-    middleName: "",
-    birthday: "",
-    sex: "",
-    email: "",
+    phone: null,
+    lastName: null,
+    firstName: null,
+    middleName: null,
+    birthday: null,
+    sex: null,
+    email: null,
 };
 
 export const userSlice = createSlice({
@@ -19,7 +19,14 @@ export const userSlice = createSlice({
             state.phone = action.payload;
         },
         setUserInfo(state, action: PayloadAction<UserState>) {
-            state = action.payload;
+            const { birthday, email, firstName, lastName, middleName, phone, sex } = action.payload;
+            state.email = email;
+            state.birthday = birthday;
+            state.firstName = firstName;
+            state.lastName = lastName;
+            state.middleName = middleName;
+            state.phone = phone;
+            state.sex = sex;
         },
     },
 });

@@ -27,13 +27,3 @@ const Template: ComponentStory<typeof Input> = args => <Input {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};
-
-// export const EndIcon = Template.bind({});
-// EndIcon.args = {
-//     endIcon: <InformationCircleIcon />,
-// };
-//
-// export const StartIcon = Template.bind({});
-// StartIcon.args = {
-//     startIcon: <InformationCircleIcon />,
-// };

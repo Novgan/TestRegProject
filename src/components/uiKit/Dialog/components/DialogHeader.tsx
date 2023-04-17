@@ -11,9 +11,7 @@ const DialogHeader: FC<Pick<DialogProps, "title" | "onClose">> = ({ title, onClo
                 aria-label="Close dialog"
                 className="hover:bg-inherit flex items-center justify-center absolute top-3 right-3 w-10 h-10"
                 data-testid="close-dialog-button"
-                size="sm"
                 onClick={onClose}
-                variant="neutral"
             >
                 <CrossIcon fill="#8D97B0" />
             </IconButton>

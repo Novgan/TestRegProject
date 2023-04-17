@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { FC, useMemo } from "react";
 import FormContainer from "../../../../components/uiKit/Forms/FormContainer/FormContainer";
 import { useDisclosure } from "../../../../shared/hooks/useDisclosure";
 import AdditionalInfoForm from "./AdditionalInfoForm";
@@ -14,8 +14,9 @@ import CircleMarkIcon from "../../../../components/uiKit/Icons/CircleMarkIcon";
 import { OutlineButton, SolidButton } from "../../../../components/uiKit/Button/Button";
 import { addAdditionalUserInfo, confirmPhone } from "../../../../api/profile";
 import { useMutation } from "react-query";
+import { removeAuthToken } from "../../../../shared/utils/auth";
 
-const AdditionalInfoContainer = () => {
+const AdditionalInfoContainer: FC<{ isFetching: boolean }> = ({ isFetching }) => {
     const { setUserPhone, setUserInfo } = userSlice.actions;
     const { lastName, firstName, middleName, birthday, sex, phone, email } = useAppSelector(
         ({ userReducer }) => userReducer
@@ -90,7 +91,8 @@ const AdditionalInfoContainer = () => {
     };
 
     const onExitHandler = () => {
-        navigate(ROUTES.authorization.route);
+        removeAuthToken();
+        navigate(ROUTES.authorization.route, { replace: true });
     };
 
     return (
@@ -98,10 +100,10 @@ const AdditionalInfoContainer = () => {
             <FormContainer
                 schema={schema}
                 onSubmit={submitAdditionalInfoHandler}
-                defaultValues={defaultValues}
+                defaultValues={defaultValues as AdditionalInfoFormFields}
                 className="flex flex-col justify-between h-full pt-12 pb-6 px-6"
             >
-                <AdditionalInfoForm onLogoutHandler={onOpen} />
+                <AdditionalInfoForm onLogoutHandler={onOpen} isFetching={isFetching} />
             </FormContainer>
             <ExitConfirmationDialog isOpen={isOpen} onClose={onClose} onSubmit={onExitHandler} />
             <FullPageDialog onClose={onFullPageDialogClose} isOpen={isFullPageDialogOpen}>

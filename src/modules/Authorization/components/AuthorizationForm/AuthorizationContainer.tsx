@@ -19,7 +19,8 @@ const defaultValues = {
     passwordConfirmation: "",
 };
 
-const redirectRef = (queryParams: string) => `${ROUTES.registration.additionalInfo.route}?${queryParams}`;
+const redirectRef = (queryParams: string) =>
+    `${ROUTES.entry.route}${ROUTES.registration.additionalInfo.route}?${queryParams}`;
 
 const AuthorizationContainer = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -35,7 +36,11 @@ const AuthorizationContainer = () => {
         if (password !== passwordConfirmation) return;
 
         const hashedPassword = MD5(password).toString();
-        await register({ email, password: hashedPassword, ref: redirectRef(`email=${email}`) });
+        await register({
+            email,
+            password: hashedPassword,
+            ref: redirectRef(`email=${email}&password=${hashedPassword}`),
+        });
     };
 
     return (

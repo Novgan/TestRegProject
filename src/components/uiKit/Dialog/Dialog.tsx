@@ -8,10 +8,8 @@ import DialogBackdrop from "./components/DialogBackdrop";
 const Dialog: FC<DialogProps> = ({
     title,
     onClose,
-    submitButtonVariant = "primary",
     isSubmitButtonDisabled = false,
     isCancelButtonDisabled = false,
-    cancelButtonVariant = "primary",
     submitText,
     cancelText,
     containerClass,
@@ -38,8 +36,6 @@ const Dialog: FC<DialogProps> = ({
                     submitText={submitText}
                     isSubmitButtonDisabled={isSubmitButtonDisabled}
                     isCancelButtonDisabled={isCancelButtonDisabled}
-                    cancelButtonVariant={cancelButtonVariant}
-                    submitButtonVariant={submitButtonVariant}
                     onSubmit={onSubmit}
                     onCancel={onCancel}
                 />

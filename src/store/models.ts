@@ -7,11 +7,11 @@ export type RootState = ReturnType<typeof rootReducer>;
 
 // user
 export interface UserState {
-    phone: string;
-    lastName: string;
-    firstName: string;
-    middleName: string;
-    birthday: string;
-    sex: string;
-    email: string;
+    phone: string | null;
+    lastName: string | null;
+    firstName: string | null;
+    middleName: string | null;
+    birthday: string | null;
+    sex: string | number | null;
+    email: string | null;
 }

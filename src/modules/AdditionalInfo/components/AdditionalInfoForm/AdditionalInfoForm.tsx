@@ -1,16 +1,45 @@
 import { useFormContext } from "react-hook-form";
 import FormInput from "../../../../components/uiKit/Forms/Inputs/CommonInput/FormInput";
-import CustomSelect from "../../../../components/uiKit/Forms/Select/Select";
 import ExitButton from "./components/ExitButton/ExitButton";
 import { SolidButton } from "../../../../components/uiKit/Button/Button";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { AdditionalInfoFormProps } from "./models";
 import FormSelect from "../../../../components/uiKit/Forms/Select/FormSelect";
+import { useAppSelector } from "../../../../shared/hooks/redux";
+import { SEX } from "../../../../shared/constants/common";
+import { useMutation } from "react-query";
+import { confirmPhone } from "../../../../api/profile";
+import { ROUTES } from "../../../../shared/constants/routes";
+import { useNavigate } from "react-router-dom";
 
-const AdditionalInfoForm: FC<AdditionalInfoFormProps> = ({ onLogoutHandler }) => {
+const AdditionalInfoForm: FC<AdditionalInfoFormProps> = ({ isFetching, onLogoutHandler }) => {
+    const userData = useAppSelector(({ userReducer }) => userReducer);
+    const navigate = useNavigate();
+
     const {
+        reset,
         formState: { isSubmitting, isDirty },
     } = useFormContext();
+
+    const { mutateAsync: sendSms } = useMutation(confirmPhone, {
+        onSuccess: query => {
+            if (!query.data.status) return;
+
+            navigate(ROUTES.registration.phoneConfirmation.route);
+        },
+    });
+
+    useEffect(() => {
+        if (!isFetching) {
+            reset(userData);
+        }
+    }, [isFetching]);
+
+    const verifyPhone = async () => {
+        if (!userData.phone) return;
+
+        await sendSms({ phone: userData.phone });
+    };
 
     return (
         <>
@@ -21,38 +50,47 @@ const AdditionalInfoForm: FC<AdditionalInfoFormProps> = ({ onLogoutHandler }) =>
                         name="lastName"
                         label="Фамилия"
                         placeholder="Михайлов"
-                        disabled={isSubmitting}
+                        disabled={isFetching || isSubmitting}
                         containerClassName="flex-1"
                     />
                     <FormInput
                         name="firstName"
                         label="Имя"
                         placeholder="Михаил"
-                        disabled={isSubmitting}
+                        disabled={isFetching || isSubmitting}
                         containerClassName="flex-1"
                     />
                     <FormInput
                         name="middleName"
                         label="Отчество"
                         placeholder="Михайлович"
-                        disabled={isSubmitting}
+                        disabled={isFetching || isSubmitting}
                         containerClassName="flex-1"
                     />
                 </div>
-                <FormInput name="birthday" label="Дата рождения" placeholder="10/08/1983" disabled={isSubmitting} />
+                <FormInput
+                    name="birthday"
+                    label="Дата рождения"
+                    placeholder="1983/10/08"
+                    disabled={isFetching || isSubmitting}
+                />
                 <div>
-                    <FormSelect
-                        name="sex"
-                        label="Пол"
-                        placeholder="Выберите пол"
-                        options={[
-                            { label: "Мужчина", value: 1 },
-                            { label: "Женщина", value: 2 },
-                            { label: "Другой", value: 3 },
-                        ]}
-                    />
+                    <FormSelect name="sex" label="Пол" placeholder="Выберите пол" options={SEX} />
                 </div>
-                <FormInput name="phone" label="Телефон" placeholder="+38 (050) 725 60 09" disabled={isSubmitting} />
+                <FormInput
+                    name="phone"
+                    label="Телефон"
+                    placeholder="+38 (050) 725 60 09"
+                    disabled={isFetching || isSubmitting}
+                    endIcon={
+                        <div
+                            className="pt-[2px] absolute right-0 w-max text-xs text-brand-400 underline"
+                            onClick={verifyPhone}
+                        >
+                            Подтвердить телефон
+                        </div>
+                    }
+                />
                 <FormInput name="email" label="E-Mail" disabled />
             </div>
             <div className="flex justify-between">
