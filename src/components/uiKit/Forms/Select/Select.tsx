@@ -1,15 +1,13 @@
 import React, { forwardRef, useId, useMemo } from "react";
-import { InputProps } from "./models";
+import { SelectProps } from "./models";
 import FieldError from "../FieldError/FieldError";
 import { Select } from "antd";
 
 const { Option } = Select;
 
-const CustomSelect = forwardRef<HTMLInputElement, InputProps>(
+const CustomSelect = forwardRef<HTMLInputElement, SelectProps>(
     (
         {
-            startIcon,
-            endIcon,
             label,
             name,
             options,
@@ -29,7 +27,7 @@ const CustomSelect = forwardRef<HTMLInputElement, InputProps>(
             const classNames = [];
 
             if (errorMessage) {
-                return "outline-red-100 outline outline-2 outline-offset-0 border-transparent focus:border-transparent";
+                return "outline-error-100 outline outline-2 outline-offset-0 border-transparent focus:border-transparent";
             }
 
             if (value) {
@@ -66,8 +64,10 @@ const CustomSelect = forwardRef<HTMLInputElement, InputProps>(
                         id={`${name ?? ""}${customId}`}
                         className={`peer w-full border-inset border border-dark-600 rounded-lg outline-none text-md max-h-10 disabled:text-dark-700 disabled:bg-dark-100 placeholder:text-dark-800 focus:border-dark-900 ${ringClassName} ${inputClassName}`}
                     >
-                        {options.map(({ label, value }) => (
-                            <Option value={value}>{label}</Option>
+                        {options.map(({ label: optionLabel, value: optionValue }) => (
+                            <Option key={optionValue} value={optionValue}>
+                                {optionLabel}
+                            </Option>
                         ))}
                     </Select>
                 </div>

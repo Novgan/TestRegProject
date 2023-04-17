@@ -1,4 +1,3 @@
-import React, { FC, useMemo } from "react";
 import { useFormContext } from "react-hook-form";
 import FormInput from "../../../../../../components/uiKit/Forms/Inputs/CommonInput/FormInput";
 import { IconButton, SolidButton } from "../../../../../../components/uiKit/Button/Button";
@@ -31,18 +30,18 @@ const RegistrationForm = () => {
                 <SolidButton size="sm" text="Зарегистрироваться" type="submit" disabled={!isDirty} />
             </div>
             <div className="flex items-center gap-x-6">
-                <span className="h-px bg-brand-200" />
-                <span className="flex-1 w-fit">Или войдите с помощью</span>
-                <span className="h-px bg-brand-200" />
+                <span className="h-px flex-1 bg-gray-300" />
+                <span className="flex-initial text-gray-400">Или войдите с помощью</span>
+                <span className="h-px flex-1 bg-gray-300" />
             </div>
-            <div className="flex">
-                <IconButton type="button">
+            <div className="flex gap-x-3">
+                <IconButton className="flex-1 border border-gray-300 rounded-lg" type="button">
                     <GmailIcon />
                 </IconButton>
-                <IconButton type="button">
+                <IconButton className="flex-1 border border-gray-300 rounded-lg" type="button">
                     <FacebookIcon />
                 </IconButton>
-                <IconButton type="button">
+                <IconButton className="flex-1 border border-gray-300 rounded-lg" type="button">
                     <LinkedinIcon />
                 </IconButton>
             </div>

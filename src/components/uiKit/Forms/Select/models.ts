@@ -1,14 +1,11 @@
 import { ChangeEventHandler, FocusEventHandler, MouseEventHandler, ReactNode } from "react";
 import { RefCallBack } from "react-hook-form";
 
-export interface InputProps {
+export interface SelectProps {
     options: Array<{ value: string | number; label: string }>;
     value?: string;
     name?: string;
     label?: string | ReactNode;
-    readOnly?: boolean;
-    startIcon?: JSX.Element;
-    endIcon?: JSX.Element;
     errorMessage?: string;
     disabled?: boolean;
     placeholder?: string;
@@ -19,12 +16,12 @@ export interface InputProps {
     maxLength?: number;
     isFilter?: boolean;
     onClick?: MouseEventHandler<HTMLInputElement>;
-    onChange?: ChangeEventHandler<HTMLInputElement>;
+    onChange?: (value: string | number) => void;
     onBlur?: FocusEventHandler<HTMLInputElement>;
     formRef?: RefCallBack;
 }
 
-export interface FormInputProps extends Omit<InputProps, "name" | "errorMessage"> {
+export interface FormSelectProps extends Omit<SelectProps, "name" | "errorMessage"> {
     defaultValue?: string;
     name: string;
 }

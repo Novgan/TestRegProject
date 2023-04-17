@@ -3,7 +3,7 @@ import { SideBarProps } from "./models";
 
 const SideBar: FC<SideBarProps> = ({ children }) => {
     return (
-        <div className="flex flex-col justify-between bg-gradient-to-t from-brand-200 to-brand-300 text-white flex-[2]">
+        <div className="flex flex-col justify-between bg-gradient-to-b from-brand-200 to-brand-300 text-white flex-[2]">
             {children}
             <img
                 className="w-full"

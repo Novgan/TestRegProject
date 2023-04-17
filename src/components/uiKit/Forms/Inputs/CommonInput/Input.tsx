@@ -28,7 +28,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             const classNames = [];
 
             if (errorMessage) {
-                return "outline-red-100 outline outline-2 outline-offset-0 border-transparent focus:border-transparent";
+                return "outline-error-100 outline outline-2 outline-offset-0 border-transparent focus:border-transparent";
             }
 
             if (value && isFilter) {
@@ -57,18 +57,18 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                         name={name}
                         ref={ref}
                         id={`${name ?? ""}${customId}`}
-                        className={`peer w-full order-2 border-inset border border-dark-600 rounded-lg outline-none ${inputIconPadding} text-md px-4 py-3 max-h-10 disabled:text-dark-700 disabled:bg-dark-100 placeholder:text-dark-800 focus:border-dark-900 ${ringClassName} ${inputClassName}`}
+                        className={`peer w-full order-2 border-inset border border-dark-600 rounded-lg outline-none ${inputIconPadding} text-md px-4 py-3 max-h-10 disabled:text-dark-700 disabled:bg-dark-100 placeholder:text-dark-800 focus:border-2 hover:border-brand-400 focus:border-brand-500 ${ringClassName} ${inputClassName}`}
                     />
                     {startIcon && (
                         <div
-                            className={`absolute left-3 w-6 h-6 text-dark-700 peer-focus:text-dark-900 cursor-pointer ${inputIconPosition}`}
+                            className={`absolute left-3 w-6 h-6 text-dark-700 peer-focus:text-brand-500 cursor-pointer ${inputIconPosition}`}
                         >
                             {startIcon}
                         </div>
                     )}
                     {endIcon && (
                         <div
-                            className={`absolute right-3 w-6 h-6 text-dark-700 peer-focus:text-dark-900 cursor-pointer ${inputIconPosition}`}
+                            className={`absolute right-3 w-6 h-6 text-dark-700 peer-focus:text-brand-500 cursor-pointer ${inputIconPosition}`}
                         >
                             {endIcon}
                         </div>

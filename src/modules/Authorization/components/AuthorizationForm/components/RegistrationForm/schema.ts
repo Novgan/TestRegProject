@@ -1,7 +1,6 @@
 import { object, ref, string } from "yup";
-import { VALIDATION_MESSAGES } from "../../../../shared/validation/messages";
-import { REGEX_VALIDATION } from "../../../../shared/validation/rules";
-import { deepTrim } from "../../../../shared/utils/string";
+import { REGEX_VALIDATION } from "../../../../../../shared/validation/rules";
+import { VALIDATION_MESSAGES } from "../../../../../../shared/validation/messages";
 
 const FORM_FIELDS = {
     EMAIL: "E-mail",

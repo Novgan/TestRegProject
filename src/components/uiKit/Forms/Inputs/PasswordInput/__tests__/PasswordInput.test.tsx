@@ -1,28 +1,29 @@
+import { vi } from "vitest";
 import { act, render, screen } from "@testing-library/react";
 import PasswordInput from "../PasswordInput";
 import userEvent from "@testing-library/user-event";
 import FormContainer from "../../../FormContainer/FormContainer";
 import { object } from "yup";
 
-const MOCKED_PUSH = jest.fn();
-const MOCKED_ON = jest.fn();
-const MOCKED_OFF = jest.fn();
+const MOCKED_PUSH = vi.fn();
+const MOCKED_ON = vi.fn();
+const MOCKED_OFF = vi.fn();
 
-jest.mock("next/router", () => ({
+vi.mock("next/router", () => ({
     useRouter() {
         return {
             push: MOCKED_PUSH,
             events: {
                 on: MOCKED_ON,
-                off: MOCKED_OFF
-            }
+                off: MOCKED_OFF,
+            },
         };
-    }
+    },
 }));
 
 const setup = () => {
     render(<PasswordInput label="Password" name="password" />);
-}
+};
 
 const formSetup = () => {
     render(
@@ -30,7 +31,7 @@ const formSetup = () => {
             <PasswordInput label="Password" name="password" />
         </FormContainer>
     );
-}
+};
 
 describe("PasswordInput component", () => {
     it("Should render component without errors", () => {
@@ -43,7 +44,7 @@ describe("PasswordInput component", () => {
 
         act(() => {
             userEvent.click(screen.getByTestId("show-password-icon"));
-        })
+        });
 
         expect(screen.getByTestId("hide-password-icon")).toBeInTheDocument();
     });

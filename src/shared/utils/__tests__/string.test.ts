@@ -1,18 +1,7 @@
-import { deepTrim, toLowerCaseFirst, trimRichTextSpaces } from "../string";
+import { describe, it, expect } from 'vitest';
+import { deepTrim } from "../string";
 
 describe("String utils", () => {
-    describe("toLowerCaseFirst", () => {
-        it("Should return empty string if str argument is empty", () => {
-            expect(toLowerCaseFirst("")).toBe("");
-        });
-
-        it("Should return string with lower cased first letter", () => {
-            const initialString = "Some string";
-            const expectedString = "some string";
-            expect(toLowerCaseFirst(initialString)).toBe(expectedString);
-        });
-    });
-
     describe("DeepTrim", () => {
         it.each([
             {
@@ -78,31 +67,6 @@ describe("String utils", () => {
         ])("nullifies empty strings", ({ actual, expected }) => {
             const result = deepTrim(actual);
             expect(result).toEqual(expected);
-        });
-    });
-
-    describe("trimRichTextSpaces", () => {
-        it.each([
-            {
-                res: trimRichTextSpaces(
-                    "<blockquote><br></blockquote><blockquote><strong><em>abiba</em></strong></blockquote><blockquote><br></blockquote><blockquote><br></blockquote><blockquote>aboba</blockquote><blockquote><br></blockquote><blockquote><br></blockquote><blockquote><em><u>abuba</u></em></blockquote><blockquote><br></blockquote><blockquote><br></blockquote>"
-                ),
-                expectedRes:
-                    "<blockquote><br></blockquote><blockquote><strong><em>abiba</em></strong></blockquote><p><br></p><blockquote>aboba</blockquote><p><br></p><blockquote><em><u>abuba</u></em></blockquote><p><br></p>",
-            },
-            {
-                res: trimRichTextSpaces(
-                    "<p><br></p><p><strong><em>abiba</em></strong></p><p><br></p><p><br></p><p>aboba</p><p><br></p><p><br></p><p><em><u>abuba</u></em></p><p><br></p><p><br></p>"
-                ),
-                expectedRes:
-                    "<p><br></p><p><strong><em>abiba</em></strong></p><p><br></p><p>aboba</p><p><br></p><p><em><u>abuba</u></em></p><p><br></p>",
-            },
-            {
-                res: trimRichTextSpaces("<p><br></p><blockquote><br></blockquote>"),
-                expectedRes: "",
-            },
-        ])("Should return trimmed rich text value (without extra spaces)", ({ res, expectedRes }) => {
-            expect(res).toBe(expectedRes);
         });
     });
 });

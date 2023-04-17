@@ -6,5 +6,6 @@ export const VALIDATION_MESSAGES = {
         `${fieldName} should be equal or less than ${maxLength} symbols`,
     REQUIRED: (fieldName: string) => `${fieldName} is required`,
     ENTER_VALID: (fieldName: string) => `Please, enter a valid ${fieldName.toLowerCase()}`,
+    ENTER_VALID_PASSWORD: "The password must consist of Latin letters (A-z), Arabic numerals (0-9)",
     CONFIRM_PASSWORD: "Confirm passwords must match",
 };

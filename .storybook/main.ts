@@ -1,17 +1,20 @@
-import { mergeConfig } from 'vite';
+const { resolve } = require("path");
 
-export default {
-    stories: ["../src/**/*.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx)"],
-    addons: ["@storybook/addon-links", "@storybook/addon-essentials"],
-    framework: "@storybook/react-vite",
+const { loadConfigFromFile, mergeConfig } = require("vite");
+
+module.exports = {
+    stories: ["../src/**/*.stories.tsx"],
+    addons: ["@storybook/addon-links", "@storybook/addon-essentials", "@storybook/addon-interactions"],
+    framework: "@storybook/react",
     core: {
         builder: "@storybook/builder-vite",
     },
-    async viteFinal(config) {
+    viteFinal: async (config, { configType }) => {
+        const { config: userConfig } = await loadConfigFromFile(resolve(__dirname, "../.vite.config.js"));
+
         return mergeConfig(config, {
-            optimizeDeps: {
-                include: ["storybook-dark-mode"],
-            },
+            ...userConfig,
+            plugins: [],
         });
     },
 };

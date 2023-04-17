@@ -16,7 +16,11 @@ const PasswordInput: FC<InputProps> = props => {
             {...props}
             type={isVisible ? "text" : "password"}
             endIcon={
-                isVisible ? <OpenEyeIcon onClick={toggleVisibility} /> : <CloseEyeIcon onClick={toggleVisibility} />
+                isVisible ? (
+                    <OpenEyeIcon onClick={toggleVisibility} data-testid="hide-password-icon" />
+                ) : (
+                    <CloseEyeIcon onClick={toggleVisibility} data-testid="show-password-icon" />
+                )
             }
         />
     );

@@ -1,4 +1,4 @@
-import { object, ref, string } from "yup";
+import { object, string } from "yup";
 import { VALIDATION_MESSAGES } from "../../../../shared/validation/messages";
 
 const FORM_FIELDS = {

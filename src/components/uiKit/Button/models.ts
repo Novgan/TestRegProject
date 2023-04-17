@@ -1,8 +1,5 @@
 import { MouseEventHandler } from "react";
 
-export type ButtonVariant = "primary" | "error" | "warning" | "neutral" | "transparent";
-export type ButtonSize = "thin" | "xs" | "sm" | "md" | "lg";
-
 export interface ButtonProps {
     className?: string;
     type?: "submit" | "reset" | "button";
@@ -11,9 +8,7 @@ export interface ButtonProps {
     startIcon?: JSX.Element;
     endIcon?: JSX.Element;
     onClick?: MouseEventHandler<HTMLButtonElement>;
-    onMiddleMouseClick?: () => void;
-    variant?: ButtonVariant;
-    size?: ButtonSize;
+    isLoading?: boolean;
 }
 
 export interface IconButtonProps extends Omit<ButtonProps, "text" | "startIcon" | "endIcon"> {

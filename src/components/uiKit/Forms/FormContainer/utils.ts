@@ -1,4 +1,3 @@
-// libs
 import { FieldValues, ResolverResult } from "react-hook-form";
 import { ValidationError } from "yup";
 import isPlainObject from "lodash/isPlainObject";

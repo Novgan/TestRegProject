@@ -1,17 +1,16 @@
 {
+    "root": true,
     "extends": [
         "airbnb-typescript",
         "airbnb/hooks",
         "plugin:@typescript-eslint/recommended",
-        "plugin:jest/recommended",
         "prettier",
         "plugin:storybook/recommended"
     ],
-    "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks", "jest", "import"],
+    "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks", "import"],
     "env": {
         "browser": true,
         "jasmine": true,
-        "jest": true,
         "es6": true
     },
     "globals": {

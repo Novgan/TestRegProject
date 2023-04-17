@@ -1,6 +1,6 @@
 import { SolidButton } from "./Button";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
+import CrossIcon from "../Icons/CrossIcon";
 
 export default {
     title: "uiKit/Button/SolidButton",
@@ -8,12 +8,6 @@ export default {
     argTypes: {
         text: {
             defaultValue: "Click me",
-        },
-        variant: {
-            defaultValue: "primary",
-        },
-        size: {
-            defaultValue: "md",
         },
         className: {
             table: {
@@ -50,10 +44,10 @@ Default.args = {};
 
 export const StartIcon = Template.bind({});
 StartIcon.args = {
-    startIcon: <InformationCircleIcon className="w-4 h-4" />,
+    startIcon: <CrossIcon className="w-4 h-4" />,
 };
 
 export const EndIcon = Template.bind({});
 EndIcon.args = {
-    endIcon: <InformationCircleIcon className="w-4 h-4" />,
+    endIcon: <CrossIcon className="w-4 h-4" />,
 };

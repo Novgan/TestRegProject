@@ -1,4 +1,4 @@
-import { DefaultValues, SubmitHandler, FieldValues, ResolverResult } from "react-hook-form";
+import { DefaultValues, SubmitHandler, FieldValues } from "react-hook-form";
 import ObjectSchema, { ObjectShape } from "yup/lib/object";
 
 export type FormContainerProps<T extends FieldValues> = {
