@@ -1,14 +1,16 @@
 import AdditionalInfoContainer from "./components/AdditionalInfoForm/AdditionalInfoContainer";
 import AdditionalInfoSideBar from "./components/AdditionalInfoSideBar/AdditionalInfoSideBar";
-import { Navigate, useSearchParams } from "react-router-dom";
+import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { setAuthToken } from "../../shared/utils/auth";
 import { loginUser } from "../../api/profile";
 import { useQuery } from "react-query";
 import { userSlice } from "../../store/reducers/UserSlice";
 import { useAppDispatch } from "../../shared/hooks/redux";
 import { ROUTES } from "../../shared/constants/routes";
+import { toast } from "react-toastify";
 
 const AdditionalInfoModule = () => {
+    const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const { setUserInfo } = userSlice.actions;
     const dispatch = useAppDispatch();
@@ -18,31 +20,35 @@ const AdditionalInfoModule = () => {
     const { isFetching } = useQuery(["profile", "login"], loginUser({ email, password }), {
         enabled: Boolean(email && password),
         select: queryData => queryData.data,
-        onSuccess: ({ status, user_data }) => {
-            if (!status) return;
-            const {
-                email: userEmail,
-                token,
-                birth_date: birthDate,
-                phone,
-                lname,
-                name,
-                sname,
-                gender_id: genderId,
-            } = user_data;
-
-            setAuthToken(token);
-            dispatch(
-                setUserInfo({
-                    birthday: birthDate,
-                    phone: phone,
-                    lastName: lname,
-                    firstName: name,
-                    middleName: sname,
-                    sex: genderId,
+        onSuccess: ({ status, msg, user_data }) => {
+            if (!status) {
+                toast.error(msg);
+                navigate(ROUTES.authorization.route);
+            } else {
+                const {
                     email: userEmail,
-                })
-            );
+                    token,
+                    birth_date: birthDate,
+                    phone,
+                    lname,
+                    name,
+                    sname,
+                    gender_id: genderId,
+                } = user_data;
+
+                setAuthToken(token);
+                dispatch(
+                    setUserInfo({
+                        birthday: birthDate,
+                        phone: phone,
+                        lastName: lname,
+                        firstName: name,
+                        middleName: sname,
+                        sex: genderId,
+                        email: userEmail,
+                    })
+                );
+            }
         },
     });
 

@@ -4,7 +4,7 @@ import CorrectMarkIcon from "../../../../../../components/uiKit/Icons/CorrectMar
 
 const CorrectMarkWithText: FC<CorrectMarkWithTextProps> = ({ text }) => {
     return (
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center truncate">
             <CorrectMarkIcon className="w-6 h-6 shrink-0" />
             <span>{text}</span>
         </div>

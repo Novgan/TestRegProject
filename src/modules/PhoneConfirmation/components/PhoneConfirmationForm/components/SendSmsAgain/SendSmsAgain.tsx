@@ -4,6 +4,7 @@ import { useDisclosure } from "../../../../../../shared/hooks/useDisclosure";
 import { useMutation } from "react-query";
 import { confirmPhone } from "../../../../../../api/profile";
 import { useAppSelector } from "../../../../../../shared/hooks/redux";
+import { toast } from "react-toastify";
 
 const threeMin = 175000;
 
@@ -14,10 +15,12 @@ const SendSmsAgain = () => {
 
     const { mutateAsync: sendSms } = useMutation(confirmPhone, {
         onSuccess: query => {
-            if (!query.data.status) return;
-
-            setDeadline(Date.now() + threeMin);
-            onSendSmsDisable();
+            if (!query.data.status) {
+                toast.error(query.data.msg);
+            } else {
+                setDeadline(Date.now() + threeMin);
+                onSendSmsDisable();
+            }
         },
     });
 

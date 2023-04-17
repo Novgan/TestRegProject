@@ -10,6 +10,7 @@ import FullPageDialog from "../../../../components/uiKit/Dialog/FullPageDialog";
 import CircleMarkIcon from "../../../../components/uiKit/Icons/CircleMarkIcon";
 import { MD5 } from "crypto-js";
 import { ROUTES } from "../../../../shared/constants/routes";
+import { toast } from "react-toastify";
 
 const { TabPane } = Tabs;
 
@@ -27,8 +28,11 @@ const AuthorizationContainer = () => {
 
     const { mutateAsync: register } = useMutation(registerUser, {
         onSuccess: query => {
-            if (!query.data.status) return;
-            onOpen();
+            if (!query.data.status) {
+                toast.error(query.data.msg);
+            } else {
+                onOpen();
+            }
         },
     });
 

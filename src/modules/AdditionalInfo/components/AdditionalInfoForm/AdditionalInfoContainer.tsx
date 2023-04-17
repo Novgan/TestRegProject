@@ -15,6 +15,7 @@ import { OutlineButton, SolidButton } from "../../../../components/uiKit/Button/
 import { addAdditionalUserInfo, confirmPhone } from "../../../../api/profile";
 import { useMutation } from "react-query";
 import { removeAuthToken } from "../../../../shared/utils/auth";
+import { toast } from "react-toastify";
 
 const AdditionalInfoContainer: FC<{ isFetching: boolean }> = ({ isFetching }) => {
     const { setUserPhone, setUserInfo } = userSlice.actions;
@@ -32,18 +33,22 @@ const AdditionalInfoContainer: FC<{ isFetching: boolean }> = ({ isFetching }) =>
 
     const { mutateAsync: addUserInfo } = useMutation(addAdditionalUserInfo, {
         onSuccess: query => {
-            if (!query.data.status) return;
-
-            dispatch(setUserPhone(query.data.data.phone));
-            onFullPageDialogOpen();
+            if (!query.data.status) {
+                toast.error(query.data.msg);
+            } else {
+                dispatch(setUserPhone(query.data.data.phone));
+                onFullPageDialogOpen();
+            }
         },
     });
 
     const { mutateAsync: sendSms } = useMutation(confirmPhone, {
         onSuccess: query => {
-            if (!query.data.status) return;
-
-            navigate(ROUTES.registration.phoneConfirmation.route);
+            if (!query.data.status) {
+                toast.error(query.data.msg);
+            } else {
+                navigate(ROUTES.registration.phoneConfirmation.route);
+            }
         },
     });
 

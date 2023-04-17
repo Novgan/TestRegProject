@@ -11,6 +11,7 @@ import { useMutation } from "react-query";
 import { confirmPhone } from "../../../../api/profile";
 import { ROUTES } from "../../../../shared/constants/routes";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AdditionalInfoForm: FC<AdditionalInfoFormProps> = ({ isFetching, onLogoutHandler }) => {
     const userData = useAppSelector(({ userReducer }) => userReducer);
@@ -23,9 +24,11 @@ const AdditionalInfoForm: FC<AdditionalInfoFormProps> = ({ isFetching, onLogoutH
 
     const { mutateAsync: sendSms } = useMutation(confirmPhone, {
         onSuccess: query => {
-            if (!query.data.status) return;
-
-            navigate(ROUTES.registration.phoneConfirmation.route);
+            if (!query.data.status) {
+                toast.error(query.data.msg);
+            } else {
+                navigate(ROUTES.registration.phoneConfirmation.route);
+            }
         },
     });
 
