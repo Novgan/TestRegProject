@@ -16,6 +16,8 @@ const ExitConfirmationDialog: FC<Pick<DialogProps, "isOpen" | "onClose" | "onSub
             childContainerClass="flex"
             submitText={"Продолжить"}
             cancelText={"Выйти"}
+            submitButtonClassName={"w-1/2"}
+            cancelButtonClassName={"w-1/2"}
             onClose={onClose}
             onCancel={onSubmit}
             onSubmit={onClose}

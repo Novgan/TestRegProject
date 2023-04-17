@@ -98,7 +98,7 @@ const AdditionalInfoForm: FC<AdditionalInfoFormProps> = ({ isFetching, onLogoutH
             </div>
             <div className="flex justify-between">
                 <ExitButton type="button" onClick={onLogoutHandler} className="text-gray-500" />
-                <SolidButton text="Далее" disabled={!isDirty} />
+                <SolidButton text="Далее" disabled={!isDirty || isSubmitting} isLoading={isSubmitting} />
             </div>
         </>
     );

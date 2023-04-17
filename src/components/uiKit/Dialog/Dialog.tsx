@@ -11,6 +11,8 @@ const Dialog: FC<DialogProps> = ({
     isSubmitButtonDisabled = false,
     isCancelButtonDisabled = false,
     submitText,
+    submitButtonClassName = "",
+    cancelButtonClassName = "",
     cancelText,
     containerClass,
     childContainerClass = "",
@@ -32,6 +34,8 @@ const Dialog: FC<DialogProps> = ({
                     {children}
                 </div>
                 <DialogFooter
+                    submitButtonClassName={submitButtonClassName}
+                    cancelButtonClassName={cancelButtonClassName}
                     cancelText={cancelText}
                     submitText={submitText}
                     isSubmitButtonDisabled={isSubmitButtonDisabled}
